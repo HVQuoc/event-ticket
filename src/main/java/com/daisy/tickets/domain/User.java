@@ -26,7 +26,7 @@ public class User {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
     /* Relationships */
@@ -35,11 +35,11 @@ public class User {
 
     @ManyToMany
     @JoinTable(
-            name = "user_atteding_events",
+            name = "user_attending_events",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
-    private List<Event> attedingEvents = new ArrayList<>();
+    private List<Event> attendingEvents = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
