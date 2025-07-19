@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Table(name = "ticket_types")
+@Table(name = "ticket_validations")
 @Getter
 @Setter
 @NoArgsConstructor

@@ -17,7 +17,6 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Event {
 
     @Id
@@ -31,7 +30,7 @@ public class Event {
     @Column(name = "start")
     private LocalDateTime start;
 
-    @Column(name = "end")
+    @Column(name = "\"end\"")
     private LocalDateTime end;
 
     @Column(name = "venue", nullable = false)
