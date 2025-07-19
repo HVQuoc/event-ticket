@@ -1,7 +1,7 @@
 package com.daisy.tickets.filters;
 
 
-import com.daisy.tickets.domain.User;
+import com.daisy.tickets.domain.entities.User;
 import com.daisy.tickets.repositories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

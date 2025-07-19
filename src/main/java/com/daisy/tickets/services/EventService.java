@@ -1,8 +1,8 @@
 package com.daisy.tickets.services;
 
 
-import com.daisy.tickets.domain.Event;
-import com.daisy.tickets.domain.dtos.CreateEventRequest;
+import com.daisy.tickets.domain.entities.Event;
+import com.daisy.tickets.domain.CreateEventRequest;
 
 import java.util.UUID;
 

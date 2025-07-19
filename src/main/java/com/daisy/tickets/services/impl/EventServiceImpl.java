@@ -1,9 +1,9 @@
 package com.daisy.tickets.services.impl;
 
-import com.daisy.tickets.domain.Event;
-import com.daisy.tickets.domain.TicketType;
-import com.daisy.tickets.domain.User;
-import com.daisy.tickets.domain.dtos.CreateEventRequest;
+import com.daisy.tickets.domain.entities.Event;
+import com.daisy.tickets.domain.entities.TicketType;
+import com.daisy.tickets.domain.entities.User;
+import com.daisy.tickets.domain.CreateEventRequest;
 import com.daisy.tickets.exceptions.UserNotFoundException;
 import com.daisy.tickets.repositories.EventRepository;
 import com.daisy.tickets.repositories.UserRepository;

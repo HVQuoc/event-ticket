@@ -1,6 +1,6 @@
 package com.daisy.tickets.repositories;
 
-import com.daisy.tickets.domain.Event;
+import com.daisy.tickets.domain.entities.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
