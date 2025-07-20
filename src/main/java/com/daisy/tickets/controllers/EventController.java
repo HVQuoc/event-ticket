@@ -3,6 +3,7 @@ package com.daisy.tickets.controllers;
 import com.daisy.tickets.domain.CreateEventRequest;
 import com.daisy.tickets.domain.dtos.CreateEventRequestDTO;
 import com.daisy.tickets.domain.dtos.CreateEventResponseDTO;
+import com.daisy.tickets.domain.dtos.GetEventDetailsResponseDTO;
 import com.daisy.tickets.domain.dtos.ListEventResponseDTO;
 import com.daisy.tickets.domain.entities.Event;
 import com.daisy.tickets.mappers.EventMapper;
@@ -48,6 +49,18 @@ public class EventController {
         UUID userId = parseUserId(jwt);
         Page<Event> events = eventService.listEventsForOrganizer(userId, pageable);
         return ResponseEntity.ok(events.map(eventMapper::toListEventResponseDTO));
+    }
+
+    @GetMapping(path = "/{eventId}")
+    public ResponseEntity<GetEventDetailsResponseDTO> getEvent(
+        @AuthenticationPrincipal Jwt jwt,
+        @PathVariable UUID eventId
+    ) {
+        UUID userId = parseUserId(jwt);
+        return eventService.getEventForOrganizer(userId, eventId)
+                .map(eventMapper::toEventDetailsResponseDTO)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     private UUID parseUserId(Jwt jwt) {
