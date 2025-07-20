@@ -2,6 +2,9 @@ package com.daisy.tickets.controllers;
 
 
 import com.daisy.tickets.domain.dtos.ErrorDTO;
+import com.daisy.tickets.exceptions.EventNotFoundException;
+import com.daisy.tickets.exceptions.EventUpdateException;
+import com.daisy.tickets.exceptions.TicketTypeNotFoundException;
 import com.daisy.tickets.exceptions.UserNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +21,33 @@ import java.util.List;
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(EventUpdateException.class)
+    public ResponseEntity<ErrorDTO> handleEventUpdateException(EventUpdateException ex) {
+        log.error("Caught EventUpdateException", ex);
+        ErrorDTO errorDTO = new ErrorDTO();
+        errorDTO.setError("An error occurred when updating event.");
+
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(TicketTypeNotFoundException.class)
+    public ResponseEntity<ErrorDTO> handleTicketTypeNotFoundException(TicketTypeNotFoundException ex) {
+        log.error("Caught TicketTypeNotFoundException", ex);
+        ErrorDTO errorDTO = new ErrorDTO();
+        errorDTO.setError("Ticket type not found");
+
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EventNotFoundException.class)
+    public ResponseEntity<ErrorDTO> handleEventNotFoundException(EventNotFoundException ex) {
+        log.error("Caught EventNotFoundException", ex);
+        ErrorDTO errorDTO = new ErrorDTO();
+        errorDTO.setError("Event not found");
+
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ErrorDTO> handleUserNotFoundException(UserNotFoundException ex) {

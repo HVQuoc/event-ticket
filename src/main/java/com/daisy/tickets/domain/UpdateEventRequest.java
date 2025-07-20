@@ -1,4 +1,5 @@
-package com.daisy.tickets.domain.dtos;
+package com.daisy.tickets.domain;
+
 
 import com.daisy.tickets.domain.entities.EventStatusEnum;
 import lombok.AllArgsConstructor;
@@ -6,13 +7,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateEventResponseDTO {
+public class UpdateEventRequest {
 
     private UUID id;
     private String name;
@@ -22,9 +24,5 @@ public class CreateEventResponseDTO {
     private LocalDateTime salesStart;
     private LocalDateTime salesEnd;
     private EventStatusEnum status;
-
-    private List<CreateTicketTypeResponseDTO> ticketTypes;
-
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private List<UpdateTicketTypeRequest> ticketTypes = new ArrayList<>();
 }

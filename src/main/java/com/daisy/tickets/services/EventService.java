@@ -1,6 +1,7 @@
 package com.daisy.tickets.services;
 
 
+import com.daisy.tickets.domain.UpdateEventRequest;
 import com.daisy.tickets.domain.entities.Event;
 import com.daisy.tickets.domain.CreateEventRequest;
 import org.springframework.data.domain.Page;
@@ -13,4 +14,5 @@ public interface EventService {
     Event createEvent(UUID organizerId, CreateEventRequest request);
     Page<Event> listEventsForOrganizer(UUID organizerId, Pageable pageable);
     Optional<Event> getEventForOrganizer(UUID organizerId, UUID eventId);
+    Event updateEventForOrganizer(UUID organizerId, UUID eventId, UpdateEventRequest event);
 }
