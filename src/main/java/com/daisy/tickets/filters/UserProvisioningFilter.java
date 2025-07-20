@@ -41,7 +41,7 @@ public class UserProvisioningFilter extends OncePerRequestFilter {
                 // Extract the info from Keycloak claims to create new User
                 User newUser = new User();
                 newUser.setId(keycloakId);
-                newUser.setName(jwt.getClaims().get("preferred_name").toString());
+                newUser.setName(jwt.getClaims().get("preferred_username").toString());
                 newUser.setEmail(jwt.getClaims().get("email").toString());
 
                 userRepository.save(newUser);
