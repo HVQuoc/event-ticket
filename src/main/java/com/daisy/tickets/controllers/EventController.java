@@ -1,10 +1,8 @@
 package com.daisy.tickets.controllers;
 
 import com.daisy.tickets.domain.CreateEventRequest;
-import com.daisy.tickets.domain.dtos.CreateEventRequestDTO;
-import com.daisy.tickets.domain.dtos.CreateEventResponseDTO;
-import com.daisy.tickets.domain.dtos.GetEventDetailsResponseDTO;
-import com.daisy.tickets.domain.dtos.ListEventResponseDTO;
+import com.daisy.tickets.domain.UpdateEventRequest;
+import com.daisy.tickets.domain.dtos.*;
 import com.daisy.tickets.domain.entities.Event;
 import com.daisy.tickets.mappers.EventMapper;
 import com.daisy.tickets.services.EventService;
@@ -39,6 +37,20 @@ public class EventController {
         Event createdEvent = eventService.createEvent(userId, request);
         CreateEventResponseDTO createdEventResponseDTO = eventMapper.toDTO(createdEvent);
         return new ResponseEntity<>(createdEventResponseDTO, HttpStatus.CREATED);
+    }
+
+    @PutMapping(path = "/{eventId}")
+    public ResponseEntity<UpdateEventResponseDTO> updateEvent(
+            @AuthenticationPrincipal Jwt jwt,
+            @PathVariable UUID eventId,
+            @Valid @RequestBody UpdateEventRequestDTO updateEventRequestDTO) {
+
+        UpdateEventRequest request = eventMapper.fromDTO(updateEventRequestDTO);
+        UUID userId = parseUserId(jwt);
+
+        Event updatedEvent = eventService.updateEventForOrganizer(userId, eventId, request);
+        UpdateEventResponseDTO updateEventResponseDTO = eventMapper.toUpdateEventResponseDTO(updatedEvent);
+        return ResponseEntity.ok(updateEventResponseDTO);
     }
 
     @GetMapping
