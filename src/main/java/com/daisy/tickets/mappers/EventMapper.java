@@ -3,6 +3,8 @@ package com.daisy.tickets.mappers;
 
 import com.daisy.tickets.domain.CreateEventRequest;
 import com.daisy.tickets.domain.CreateTicketTypeRequest;
+import com.daisy.tickets.domain.UpdateEventRequest;
+import com.daisy.tickets.domain.UpdateTicketTypeRequest;
 import com.daisy.tickets.domain.dtos.*;
 import com.daisy.tickets.domain.entities.Event;
 import com.daisy.tickets.domain.entities.TicketType;
@@ -25,5 +27,13 @@ public interface EventMapper {
     GetEventTicketTypesResponseDTO toGetEventTicketTypesResponseDTO(TicketType ticketType);
 
     GetEventDetailsResponseDTO toEventDetailsResponseDTO(Event event);
+
+    UpdateTicketTypeRequest fromDTO(UpdateTicketTypeRequestDTO dto);
+
+    UpdateEventRequest fromDTO(UpdateEventRequestDTO dto);
+
+    UpdateTicketTypeResponseDTO toUpdateTicketTypeDTO(TicketType ticketType);
+
+    UpdateEventResponseDTO toUpdateEventResponseDTO(Event event);
 
 }
