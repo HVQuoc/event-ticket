@@ -3,6 +3,7 @@ package com.daisy.tickets.services.impl;
 import com.daisy.tickets.domain.UpdateEventRequest;
 import com.daisy.tickets.domain.UpdateTicketTypeRequest;
 import com.daisy.tickets.domain.entities.Event;
+import com.daisy.tickets.domain.entities.EventStatusEnum;
 import com.daisy.tickets.domain.entities.TicketType;
 import com.daisy.tickets.domain.entities.User;
 import com.daisy.tickets.domain.CreateEventRequest;
@@ -142,6 +143,11 @@ public class EventServiceImpl implements EventService {
     @Transactional
     public void deleteEventForOrganizer(UUID organizerId, UUID eventId) {
         getEventForOrganizer(organizerId, eventId).ifPresent(eventRepository::delete);
+    }
+
+    @Override
+    public Page<Event> listPublishedEvents(Pageable pageable) {
+        return eventRepository.findByStatus(EventStatusEnum.PUBLISHED, pageable);
     }
 
 }
