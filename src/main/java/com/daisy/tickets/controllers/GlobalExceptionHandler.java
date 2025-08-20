@@ -2,10 +2,7 @@ package com.daisy.tickets.controllers;
 
 
 import com.daisy.tickets.domain.dtos.ErrorDTO;
-import com.daisy.tickets.exceptions.EventNotFoundException;
-import com.daisy.tickets.exceptions.EventUpdateException;
-import com.daisy.tickets.exceptions.TicketTypeNotFoundException;
-import com.daisy.tickets.exceptions.UserNotFoundException;
+import com.daisy.tickets.exceptions.*;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,6 +18,15 @@ import java.util.List;
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(QRCodeGenerationException.class)
+    public ResponseEntity<ErrorDTO> handleQRCodeGenerationException(QRCodeGenerationException ex) {
+        log.error("Caught QRCode generation exception", ex);
+        ErrorDTO errorDTO = new ErrorDTO();
+        errorDTO.setError("An error occurred when generating QR Code.");
+
+        return new ResponseEntity<>(errorDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
     @ExceptionHandler(EventUpdateException.class)
     public ResponseEntity<ErrorDTO> handleEventUpdateException(EventUpdateException ex) {
