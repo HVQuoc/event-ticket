@@ -1,5 +1,6 @@
 package com.daisy.tickets.controllers;
 
+import com.daisy.tickets.domain.dtos.GetPublishedEventDetailsResponseDTO;
 import com.daisy.tickets.domain.dtos.ListPublishedEventResponseDTO;
 import com.daisy.tickets.domain.entities.Event;
 import com.daisy.tickets.mappers.EventMapper;
@@ -8,10 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/api/v1/published-events")
@@ -35,6 +35,16 @@ public class PublishedEventController {
         }
 
         return ResponseEntity.ok(events.map(eventMapper::toListPublishedEventResponseDTO));
+    }
+
+    @GetMapping("{eventId}")
+    public ResponseEntity<GetPublishedEventDetailsResponseDTO> getPublishedEvent(
+            @PathVariable UUID eventId
+    ) {
+         return eventService.getPublishedEvent(eventId)
+                .map(eventMapper::toGetPublishedEventDetailsResponseDTO)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
 }
