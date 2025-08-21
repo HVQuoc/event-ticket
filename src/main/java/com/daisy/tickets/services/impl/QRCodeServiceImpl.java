@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class QRCodeServiceImpl implements QRCodeService {
+
     @Override
     public QrCode generateQRCode(Ticket ticket) {
         return null;
