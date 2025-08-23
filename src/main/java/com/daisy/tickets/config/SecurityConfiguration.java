@@ -18,7 +18,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(
             HttpSecurity http,
             UserProvisioningFilter userProvisioningFilter,
-            JwtAuthenticationConverter jwtAuthenticationConverter
+            JwtConfigurationConverter jwtConfigurationConverter
     ) throws Exception {
         http
                 .authorizeHttpRequests(auth ->
@@ -31,7 +31,7 @@ public class SecurityConfiguration {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(oauth2 ->
                         oauth2.jwt(jwt ->
-                                jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)
+                                jwt.jwtAuthenticationConverter(jwtConfigurationConverter)
                         ))
                 .addFilterAfter(userProvisioningFilter, BearerTokenAuthenticationFilter.class);
 
