@@ -12,6 +12,7 @@ import com.daisy.tickets.repositories.TicketTypeRepository;
 import com.daisy.tickets.repositories.UserRepository;
 import com.daisy.tickets.services.QRCodeService;
 import com.daisy.tickets.services.TicketTypeService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,7 @@ public class TicketTypeServiceImpl implements TicketTypeService {
     private final QRCodeService qrCodeService;
 
     @Override
+    @Transactional
     public Ticket purchaseTicket(UUID userId, UUID ticketTypeId) {
 
         User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(
