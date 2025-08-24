@@ -1,7 +1,5 @@
 package com.daisy.tickets.config;
 
-import org.apache.catalina.LifecycleState;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
