@@ -1,7 +1,6 @@
 package com.daisy.tickets.domain.dtos;
 
 
-import com.daisy.tickets.domain.entities.EventStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

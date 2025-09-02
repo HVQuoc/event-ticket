@@ -17,4 +17,9 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:9090/realms/event-ticket-platform
+          issuer-uri: ${JWT_ISSUER_URI:http://localhost:9090/realms/event-ticket-platform}
+
+stripe:
+  secret-key: ${STRIPE_SECRET_KEY}
+  webhook-secret: ${STRIPE_WEBHOOK_SECRET}
+  currency: ${STRIPE_CURRENCY}

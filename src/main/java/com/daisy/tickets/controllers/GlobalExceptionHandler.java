@@ -19,6 +19,15 @@ import java.util.List;
 @Slf4j
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(PaymentException.class)
+    public ResponseEntity<ErrorDTO> handlePaymentException(PaymentException ex) {
+        log.error("Caught payment exception", ex);
+        ErrorDTO errorDTO = new ErrorDTO();
+        errorDTO.setError("Error occurred when processing payment");
+
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(TicketNotFoundException.class)
     public ResponseEntity<ErrorDTO> handleTicketNotFoundException(TicketNotFoundException ex) {
         log.error("Caught ticket not found exception", ex);
